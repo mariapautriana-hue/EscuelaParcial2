@@ -35,7 +35,7 @@ public class Profesor extends Persona {
     public int getHoras() { return horas; }
     public void setHoras(int horas) { this.horas = horas; }
 
-    // POLIMORFISMO (sobrecarga)
+    // POLIMORFISMO 
     public double calcularSalario() {
         double base = salarioHora * horas;
         return base + (base * 0.30);

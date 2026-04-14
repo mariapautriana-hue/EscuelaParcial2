@@ -23,7 +23,6 @@ public class Colegio {
         profesores.add(p);
     }
 
-    // REPORTE 1
     public String reporteEstudiantes() {
         String r = "LISTA DE ESTUDIANTES:\n";
         for (Estudiante e : estudiantes) {
@@ -32,7 +31,7 @@ public class Colegio {
         return r;
     }
 
-    // REPORTE 2
+    
     public String reporteProfesores() {
         profesores.sort((a, b) -> Double.compare(b.calcularSalario(), a.calcularSalario()));
 
