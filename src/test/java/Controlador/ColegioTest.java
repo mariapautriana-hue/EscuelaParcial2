@@ -4,9 +4,7 @@
  */
 package Controlador;
 
-import Modelo.Estudiante;
-import Modelo.Profesor;
-
+import Modelo.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,29 +13,47 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author usuario
  */
 public class ColegioTest {
-    
+    // este es el test de integracion
     @Test
-    public void testAgregarYReporteEstudiantes() {
-        Colegio c = new Colegio();
-        c.agregarEstudiante(new Estudiante("Ana", "Dir", "123", "2005", "E1", "10"));
+    public void testFlujoCompletoSistema() {
 
-        String r = c.reporteEstudiantes();
+        // Crear el sistema
+        Colegio colegio = new Colegio();
 
-        assertTrue(r.contains("Ana"));
-    }
+        // Crear estudiantes
+        Estudiante e1 = new Estudiante("Ana", "Dir1", "111", "2005", "E1", "10");
+        Estudiante e2 = new Estudiante("Juan", "Dir2", "222", "2006", "E2", "11");
 
-    @Test
-    public void testOrdenProfesores() {
-        Colegio c = new Colegio();
+        // Crear profesores
+        Profesor p1 = new Profesor("Carlos", "Dir3", "333", "1980", "C1", "Math", 50, 100); // 6500
+        Profesor p2 = new Profesor("Laura", "Dir4", "444", "1985", "C2", "Fisica", 80, 100); // 10400
 
-        Profesor p1 = new Profesor("A", "Dir", "1", "1980", "1", "Math", 50, 100);
-        Profesor p2 = new Profesor("B", "Dir", "2", "1980", "2", "Math", 100, 100);
+        // Integración: agregar al sistema
+        colegio.agregarEstudiante(e1);
+        colegio.agregarEstudiante(e2);
 
-        c.agregarProfesor(p1);
-        c.agregarProfesor(p2);
+        colegio.agregarProfesor(p1);
+        colegio.agregarProfesor(p2);
 
-        String r = c.reporteProfesores();
+        // Generar reportes
+        String reporteEst = colegio.reporteEstudiantes();
+        String reporteProf = colegio.reporteProfesores();
 
-        assertTrue(r.indexOf("B") < r.indexOf("A"));
+        // VALIDACIONES
+
+        // Estudiantes agregados correctamente
+        assertTrue(reporteEst.contains("Ana"));
+        assertTrue(reporteEst.contains("Juan"));
+
+        // Profesores agregados
+        assertTrue(reporteProf.contains("Carlos"));
+        assertTrue(reporteProf.contains("Laura"));
+
+        // Orden correcto (mayor salario primero)
+        assertTrue(reporteProf.indexOf("Laura") < reporteProf.indexOf("Carlos"));
+
+        // Validar cálculo interno integrado
+        assertTrue(reporteProf.contains("10400")); // salario Laura
+        assertTrue(reporteProf.contains("6500"));  // salario Carlos
     }
 }
