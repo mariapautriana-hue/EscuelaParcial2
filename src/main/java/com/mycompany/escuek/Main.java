@@ -8,9 +8,10 @@ package com.mycompany.escuek;
  *
  * @author usuario
  */
-public class Main {
+import Vista.VentanaPrincipal;
 
+public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        new VentanaPrincipal().setVisible(true);
     }
 }
